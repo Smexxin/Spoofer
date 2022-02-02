@@ -1,5 +1,7 @@
 ## FiveM spoofer 
 
+## [Discord](https://discord.gg/FeeWGNmhHx) Join
+
 ***
 
 **Simple spoofer for FiveM**
