@@ -1,6 +1,6 @@
 ## FiveM spoofer 
 
-## [Discord](https://discord.gg/FeeWGNmhHx) Join
+## [Discord](https://discord.gg/ZZAMPHVnTQ) Join
 
 ***
 
