@@ -1,6 +1,6 @@
 ## FiveM spoofer 
 
-### Join Discord : https://discord.gg/YV9Ut3q4Yf
+### [Discord New Server Link](https://discord.gg/4xVkxj4cv4)
 
 ***
 
