@@ -1,6 +1,6 @@
 ## FiveM spoofer 
 
-### [Discord New Server Link](https://discord.gg/4xVkxj4cv4)
+### [Discord.gg/Sarnax](https://discord.com/invite/sarnax)
 
 ***
 
