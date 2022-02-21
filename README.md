@@ -1,6 +1,6 @@
 ## FiveM spoofer 
 
-  [Discord.gg/Sarnax](https://discord.com/invite/sarnax) 
+### FOR SUPPORT : [Discord.gg/Sarnax](https://discord.com/invite/sarnax) 
 
 ***
 
