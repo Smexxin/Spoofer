@@ -11,3 +11,11 @@
 
 ***
 
+***
+
+**Discord Support & Sell**
+> - Craete Cheating Private // Not Detected & If Banned = Refund
+> - Contact Discord to order.
+
+***
+
