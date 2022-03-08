@@ -1,6 +1,4 @@
 ## FiveM spoofer 
-> Source code 
-
 
 
   <p align="center">
