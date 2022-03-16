@@ -9,7 +9,7 @@ This is an Open source item so it doesn't have a .sln file, it's just a source d
 </p>
 
 
-### 💬 Discord For Support : [HEX SUPPORT](https://discord.com/users/943374631644045363) (Add Friend For Invite Discord)
+### 💬 Discord For Support : [HEX Community](https://discord.com/users/943374631644045363) (Add Friend For Invite Discord)
 > - Contact Cheating Private / Source DM 
 > - We do not expect profit We hope you only get good things.
 
