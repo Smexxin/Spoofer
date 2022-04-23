@@ -2,6 +2,7 @@
 ```sh-session
 C++ OPEN SOURCE / This is an Open source item so it doesn't have a .sln file, it's just a source distribution, lifting the ban of fiveM, it's free and don't sell it.
 ```
+**NOTE:**  If you're having trouble using it or don't understand the steps, Please Join Discord for HELP ❗ 
 
 ***
   <p align="center">
@@ -18,13 +19,13 @@ C++ OPEN SOURCE / This is an Open source item so it doesn't have a .sln file, it
 
 ### 📌・  JOIN DISCORD / SUPPORT : [HEX COMMUNITY](https://discord.gg/6ZdJwQ7Dmk) 
 
-* ` TEACH HOW TO USE AND HELP SOLVE PROBLEMS
-* ` SELL CHEATING PRIVATE / SPOOFER / SOURCE CODE / ETC `
+* `👋 SELL CHEATING PRIVATE / SPOOFER / SOURCE CODE / ETC `
+* ` UPDATE FREE LIFETIME & UD `
 * ` IF YOU WANT A SAFE CHEATING PRIVATE , THINK OF ME`
-* ` SAFE 100% IF BANNED = REFUND`
+* ` SAFE 100% IF BANNED = REFUND MONEY`
 * ` UPDATE LIFETIME & SUPPORT 24 HR `
 
-🤓・To order, please add a friend to request an invitation to the Discord server.
+🐵・**We** have a backup server base and many main servers and we are **LEGIT**
  ```sh-session
 If you can't join the server please add me to invite discord server : Sarnax#7522
 ```          
