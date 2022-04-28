@@ -17,7 +17,7 @@ C++ OPEN SOURCE / This is an Open source item so it doesn't have a .sln file, it
     </a>
 </p>
 
-### 📌・  JOIN DISCORD / SUPPORT : [HEX COMMUNITY](https://discord.gg/S2NxQRvsvn) 
+### 📌・  JOIN DISCORD / PRICES : [HEX COMMUNITY](https://discord.gg/S2NxQRvsvn) 
 
 * `👋 SELL CHEATING PRIVATE / SPOOFER / SOURCE CODE / ETC `
 * ` UPDATE FREE LIFETIME & UD `
