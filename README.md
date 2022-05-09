@@ -1,6 +1,6 @@
 ### FiveM spoofer 
 ```sh-session
-C++ OPEN SOURCE / This is an Open source item so it doesn't have a .sln file, it's just a source distribution, lifting the ban of fiveM, it's free and don't sell it.
+THIS IS AN OPEN SOURCE ITEM SO IT DOESN'T HAVE A .SLN FILE, IT'S JUST A SOURCE DISTRIBUTION, LIFTING THE BAN OF FIVEM / IT FREE 
 ```
 **NOTE:**  If you're having trouble using it or don't understand the steps, Please Join Discord for HELP ❗ 
 
