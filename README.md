@@ -17,7 +17,7 @@ THIS IS AN OPEN SOURCE ITEM SO IT DOESN'T HAVE A .SLN FILE, IT'S JUST A SOURCE D
     </a>
 </p>
 
-### 📌・  JOIN DISCORD / BUY  : [HEX SHOP](https://discord.gg/S2NxQRvsvn) 
+### 📌・  JOIN DISCORD / SHOP  : [HEX COMMUNITY](https://discord.gg/S2NxQRvsvn) 
 
 * `👋 SELL CHEATING PRIVATE / SPOOFER / SOURCE CODE / ETC `
 * `✔️ UPDATE FREE & LIFETIME & UNDETECTED & BYPASS DRIVER , INJECTOR `
