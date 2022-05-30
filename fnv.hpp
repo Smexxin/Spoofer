@@ -109,8 +109,6 @@ namespace detail
 				result = hash_byte(result, *str++);
 			while (*str != '\0');
 
-			return result;
-		}
 	};
 }
 
