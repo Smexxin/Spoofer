@@ -119,3 +119,6 @@ using fnv = ::detail::FnvHash<sizeof(void*) * 8>;
 #define FNV(str) (std::integral_constant<fnv::hash, fnv::hash_constexpr(str)>::value)
 #define FNV32(str) (std::integral_constant<fnv32::hash, fnv32::hash_constexpr(str)>::value)
 #define FNV64(str) (std::integral_constant<fnv64::hash, fnv64::hash_constexpr(str)>::value)
+	
+				return result;
+		}
