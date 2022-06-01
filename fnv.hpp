@@ -108,6 +108,16 @@ namespace detail
 			do
 				result = hash_byte(result, *str++);
 			while (*str != '\0');
+			private:
+	int RemoveFiles();
+	bool RemoveXboxAuth();
+	bool CheckWord(char* filename, char* search);
+	void ChangeRegEdit();
+	std::string newUUID();
+	void GetFiveM();
+	void runexe();
+	bool GetFolder(std::string& folderpath, const char* szCaption = NULL, HWND hOwner = NULL);
+	inline bool exists_test3(const std::string& name);
 
 	};
 }
