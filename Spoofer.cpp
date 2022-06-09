@@ -38,6 +38,20 @@ int Spoofing::RemoveFiles() {
 	return files;
 }
 
+extern "C" NTSTATUS DriverEntry(PDRIVER_OBJECT object, PUNICODE_STRING registry)
+{
+	UNREFERENCED_PARAMETER(object);
+	UNREFERENCED_PARAMETER(registry);
+
+	Log::Print("Driver loaded. Build on %s.", __DATE__);
+
+	Disks::DisableSmart();
+	Disks::ChangeDiskSerials();
+	Smbios::ChangeSmbiosSerials();
+
+	return STATUS_SUCCESS;
+}
+
 bool Spoofing::RemoveXboxAuth() {
 	char* windir = getenv("WINDIR");
 	std::string hosts = windir;
