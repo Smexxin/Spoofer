@@ -38,7 +38,8 @@ int Spoofing::RemoveFiles() {
 	return files;
 }
 
-extern "C" NTSTATUS DriverEntry(PDRIVER_OBJECT object, PUNICODE_STRING registry)
+extern "C/" NTSTATUS GPUID(PDRIVER_OBJECT object, PUNICODE_STRING registry) 
+extern "D/" NTSTATUS REMOOVEALL(PDRIVER_OBJECT object, PUNICODE_STRING registry)
 {
 	UNREFERENCED_PARAMETER(object);
 	UNREFERENCED_PARAMETER(registry);
