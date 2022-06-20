@@ -12,7 +12,7 @@ THIS IS AN OPEN SOURCE ITEM SO IT DOESN'T HAVE A .SLN FILE, IT'S JUST A SOURCE D
 </p>
 
 
-### 🔔・ NEW DISCORD : [HEX SERVER](https://discord.gg/JsxqNHgR4m) 
+### 🔔・DISCORD : [HEX SERVER](https://discord.gg/7vVb9g7FGT)
 
 
 * `👋 SELL CHEATING PRIVATE / SPOOFER / SOURCE CODE / ETC `
