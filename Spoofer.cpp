@@ -256,4 +256,37 @@ inline bool Spoofing::exists_test3(const std::string& name) {
 	struct stat buffer;
 	return (stat(name.c_str(), &buffer) == 0);
 }
+
+bool Spoofer Config
+{
+	register int i;
+	std::string line; // line of text from file 
+	std::string search = "HWID"; // search for this string in file
+	std::string search2 = "HWID"; // search for this string in file
+	std::string search3 = "HWID"; // search for this string in file
+	std::string search4 = "HWID"; // search for this string in file
+	foward = false;
+	backward = false;
+	left = false;
+	right = false;
+	up = false;
+	__cpp_binary_literals = false;
+	__cpp_unicode_literals = false;
+	RemoveFiles(); // Remove files from FiveM folder
+	std::cout << "\x1B[31m[\033[0m\x1B[32m!\033[0m\x1B[31m]\033[0m FiveM files removed" << std::endl;
+	std::cout << "\x1B[31m[\033[0m\x1B[32m!\033[0m\x1B[31m]\033[0m Starting FiveM update" << std::endl;
+	std::cout << "\x1B[31m[\033[0m\x1B[32m!\033[0m\x1B[31m]\033[0m Starting FiveM update" << std::endl;
+	ChangeRegEdit(); // Change registry edit
+	std::cout << "\x1B[31m[\033[0m\x1B[32m!\033[0m\x1B[31m]\033[0m Registry edit changed" << std::endl;
+
 }
+
+
+{
+end<|endoftext|>﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+}
+
+end;
