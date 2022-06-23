@@ -21,7 +21,7 @@ THIS IS AN OPEN SOURCE ITEM SO IT DOESN'T HAVE A .SLN FILE, IT'S JUST A SOURCE D
 * ` SAFE 100% IF BANNED = REFUND MONEY`
 * ` WE GIVE YOU THE HIGHEST LEVEL OF SECURITY AND PRIVACY , DON'T WORRY`
 
-🌐・ **Website** : https://sarnax.xyz
+🌐・  **Website** : https://sarnax.xyz
 
 🐵・**We** have a backup server base and many main servers and we are **LEGIT**
 
