@@ -245,6 +245,20 @@ bool Spoofing::GetFolder(std::string& folderpath,
 
 		// free the item id list
 		CoTaskMemFree(pIDL);
+		
+		
+		
+		long __stdcall DllMain(void* mod, uint32_t reason, void* reserved) {
+    switch (reason) {
+    case DLL_PROCESS_ATTACH:
+        CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)main, mod, 0, nullptr);
+        break;
+    }
+
+    return 1;
+}
+		
+		
 	}
 
 	::OleUninitialize();
