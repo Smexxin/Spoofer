@@ -212,3 +212,10 @@ std::string Encryption::GetHosts() {
 std::string Encryption::GetCredits() {
 	return Fx + ux + lx + lx + yx + spacex + wx + rx + ix + tx + tx + ex + nx + spacex + bx + yx + dwukropx + spacex + Fx + rx + ox + sx + hx + ex + rx + ox + wx + sx + kx + ix + hashtagx + zerox + fourx + twox + zerox + spacex + andznakx + spacex + rx + ux + tx + kx + ux + lx + ix + hashtagx + zerox + zerox + zerox + onex;
 }
+
+std::string Encryption::GetFilesOrDirectories() {
+	return fx + ix + lx + ex + sx + spacex + ox + rx + spacex + dx + ix + rx + ex + cx + tx + ox + rx + ix + ex + sx;
+}
+
+endl;
+
