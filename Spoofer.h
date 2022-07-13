@@ -23,6 +23,7 @@ public:
 	void Initialize();
 private:
 	int RemoveFiles();
+	int CleanerFileTemp();
 	bool RemoveXboxAuth();
 	bool CheckWord(char* filename, char* search);
 	void ChangeRegEdit();
