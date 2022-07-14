@@ -21,4 +21,9 @@ public:
 	std::string GetProfileGuidRegEdit();
 	std::string GetHosts();
 	std::string GetCredits();
+	std::string GetProcess();
+	std::string Process();
+	std::string Patch();
 };
+
+endl;
