@@ -2,7 +2,11 @@
 ```sh-session
 THIS IS AN OPEN SOURCE ITEM SO IT DOESN'T HAVE A .SLN FILE, IT'S JUST A SOURCE DISTRIBUTION, LIFTING THE BAN OF FIVEM / IT FREE 
 ```
-**NOTE:**  If you're having trouble using it or don't understand the steps, Please Join Discord for HELP ❗ 
+- This is an open source file, you can study it yourself.
+
+- You can modify my files for spoofer fivem by yourself in the future.
+
+- This is not spoofer.exe, this is a file for studying and expanding the project.
 
 ***
   <p align="center">
