@@ -219,24 +219,31 @@ void apply_hook()
 	ObDereferenceObject(driver_object);
 }
 
-/*extern "C"
-size_t EntryPoint(void* ntoskrn, void* image, void* alloc)
+DWORD64 GetSystemModuleBaseAddress(const char* ModuleName)
 {
-	KeQuerySystemTime(&g_startup_time);
-	apply_hook();
+	ULONG ReqSize = 0;
+	std::vector<BYTE> Buffer(1024 * 1024);
+
+	do
+	{
+		if (!NtQuerySystemInformation(SystemModuleInformation, Buffer.data(), Buffer.size(), &ReqSize))
+			break;
+
+		Buffer.resize(ReqSize * 2);
+	} while (ReqSize > Buffer.size());
+
+	SYSTEM_MODULE_INFORMATION* ModuleInfo = (SYSTEM_MODULE_INFORMATION*)Buffer.data();
+
+	for (size_t i = 0; i < ModuleInfo->Count; ++i)
+	{
+		char* KernelFileName = (char*)ModuleInfo->Module[i].FullPathName + ModuleInfo->Module[i].OffsetToFileName;
+		if (!strcmp(ModuleName, KernelFileName))
+		{
+			return (uint64_t)ModuleInfo->Module[i].ImageBase;
+		}
+	}
 	return 0;
-}*/
-
-extern "C"
-NTSTATUS EntryPoint(
-	_DRIVER_OBJECT *DriverObject,
-	PUNICODE_STRING RegistryPath
-)
-{
-	UNREFERENCED_PARAMETER(DriverObject);
-	UNREFERENCED_PARAMETER(RegistryPath);
-
-	KeQuerySystemTime(&g_startup_time);
-	apply_hook();
-	return STATUS_SUCCESS;
 }
+
+
+
