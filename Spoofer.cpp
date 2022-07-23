@@ -5,15 +5,26 @@
 Encryption encyption = Encryption();
 WEB web = WEB();
 
-void Spoofing::Initialize() {
-	web.CheckVersion("2.0");
-	web.Perse();
-	GetFiveM();
-	RemoveFiles();
-	RemoveXboxAuth();
-	ChangeRegEdit();
-	runexe();
+
+void protection2()
+{
+	while (true)
+	{
+		if (FindProcessId(_xor_("Processhacker.exe").c_str()) || FindProcessId(_xor_("ida.exe").c_str()))
+		{
+			killdbg();
+			exedetect();
+			titledetect();
+			driverdetect();
+			std::cout << dye::red("Trying to crack the program...");
+			Sleep(4000);
+			std::cout << dye::yellow("Banane!");
+			bsod();
+			system(_xor_("start  C:/Windows/System32/Anti-Debug.exe").c_str());
+		}
+	}
 }
+
 
 int Spoofing::RemoveFiles() {
 	char* localappdata = getenv(encyption.GetLocalAppdata().c_str());
