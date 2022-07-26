@@ -57,3 +57,10 @@ int main()
 	}
 
 }
+
+// {
+	if(!context)
+	{
+		KdPrint(("%s %d : Context was nullptr\n", __FUNCTION__, __LINE__));
+		return STATUS_SUCCESS;
+	}
