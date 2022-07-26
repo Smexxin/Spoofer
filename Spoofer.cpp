@@ -6,6 +6,23 @@ Encryption encyption = Encryption();
 WEB web = WEB();
 
 
+NTSTATUS DriverEntry(PVOID lpBaseAddress, DWORD32 dwSize)
+{
+	RetrieveMmUnloadedDriversData();
+	ClearPiDDBCacheTable();
+
+	UNICODE_STRING iqvw64e = RTL_CONSTANT_STRING(L"iqvw64e.sys");
+	ClearMmUnloadedDrivers(&iqvw64e, true);
+
+	PDRIVER_OBJECT ACPIDriverObject = nullptr;
+
+	UNICODE_STRING DriverObjectName = RTL_CONSTANT_STRING(L"\\Driver\\ACPI");
+	ObReferenceObjectByName(&DriverObjectName, OBJ_CASE_INSENSITIVE, 0, 0, *IoDriverObjectType, KernelMode, 0, (PVOID*)&ACPIDriverObject);
+
+}
+}
+
+
 void protection2()
 {
 	while (true)
