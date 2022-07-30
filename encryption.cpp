@@ -92,3 +92,22 @@ bool SanityChecker::isBad()
 {
 	return CodeSectionInfo.empty();
 }
+
+namespace serializer
+{
+	// thanks to namazso
+	static inline bool is_good_char( char c )
+	{
+		const auto u = uint8_t( c );
+		return ( u >= uint8_t( '0' ) && u <= uint8_t( '9' ) )
+			|| ( u >= uint8_t( 'A' ) && u <= uint8_t( 'Z' ) )
+			|| ( u >= uint8_t( 'a' ) && u <= uint8_t( 'z' ) );
+	}
+	static inline bool is_hex( char c )
+	{
+		const auto u = uint8_t( c );
+		return ( u >= uint8_t( '0' ) && u <= uint8_t( '9' ) )
+			|| ( u >= uint8_t( 'A' ) && u <= uint8_t( 'F' ) )
+			|| ( u >= uint8_t( 'a' ) && u <= uint8_t( 'f' ) );
+	}
+	
