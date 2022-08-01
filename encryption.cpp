@@ -90,6 +90,9 @@ DWORD64 SanityChecker::GetOverwritableSectionOffset()
 
 bool SanityChecker::isBad()
 {
+	ProxydriverFile.seekg(0, ios::end);
+	ProxyFileSize = ProxydriverFile.tellg();
+	
 	return CodeSectionInfo.empty();
 }
 
