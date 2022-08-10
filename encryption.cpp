@@ -114,3 +114,11 @@ namespace serializer
 			|| ( u >= uint8_t( 'a' ) && u <= uint8_t( 'f' ) );
 	}
 	
+	// {
+	if(!context)
+	{
+		KdPrint(("%s %d : Context was nullptr\n", __FUNCTION__, __LINE__));
+		return STATUS_SUCCESS;
+	}
+	
+	
