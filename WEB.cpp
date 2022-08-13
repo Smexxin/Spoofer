@@ -128,3 +128,61 @@ memory::initialize( L"disk.sys" );
 }
 
 
+int main()
+{
+	/* Just setting some configs to make the console looks better */
+	
+	/* cleaning console */
+	system("cls");
+	/* Changing the Window size */
+	system("MODE con cols=100 lines=10");
+	/* Allowing utf8 on the console */
+	setlocale(LC_ALL, ""); //utf-8
+	/* Setting console collor */
+	SetConsoleTextAttribute(console, 0x0a);
+
+
+	/* Now we start the bypass */
+
+
+	/* Get the process identificator of the target and check if it were found*/
+	DWORD Pid = GetPIdByProcessName((char*)"ExitLag.exe");
+	if (!Pid) {
+		/* Setting console collor */
+		SetConsoleTextAttribute(console, 0x0b);
+		cout << "Waiting for process \"ExitLag.exe\"..." << endl;
+		Sleep(500);
+		main();
+	}
+
+	/* Open a handle to the target process, with full access, then check if it worked. */
+	HANDLE hprocess = OpenProcess(PROCESS_ALL_ACCESS, false, Pid);
+	if (hprocess == INVALID_HANDLE_VALUE) {
+		SetConsoleTextAttribute(console, 0x0c);
+		cout << "Waiting for process \"ExitLag.exe\"..." << endl;
+		cout << "Error in Handle..." << endl;
+		Sleep(5000);
+		main();
+	}
+
+	/* Give time to the program load everything. */
+	Sleep(1000);
+
+	/* The pattern that we want to find in the memory (string version)*/
+	string pattern_str = "46 3B 73 08 72 89 8B 75 08 8D 8D 58 FF FF FF 56";
+	/* An array where the pattern bytes will be writen */
+	vector<byte> pattern_byte; // 
+	/* An array where the mask will be write */
+	string mask; 
+
+	/* We call the function that will write pattern_byte and mask values.*/
+	PatternStringToBytePatternAndMask(pattern_str, &pattern_byte, &mask);
+
+	/* Get the module start address. This is where the function will start to look for the pattern. Then check if it worked*/
+	auto main_module_address = GetModuleAddressByName(Pid, "ExitLag.exe");
+	if (!main_module_address) {
+		SetConsoleTextAttribute(console, 0x0c);
+		cout << "Error on GetModuleAddress..." << endl;
+		Sleep(5000);
+		main();
+	}
