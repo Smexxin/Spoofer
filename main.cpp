@@ -5,6 +5,42 @@
 #include "encryption.h"
 #include "WEB.h"
 
+
+// Where the magic happens
+
+
+	/* The size of the memory that we will look for the pattern */
+	auto size_to_scan = 4096 * 100;
+	
+
+	/* Now we call the function that will search for the pattern*/
+	DWORD* address = (DWORD*)ExPatternScanByStartAddress(hprocess, main_module_address, size_to_scan, pattern_byte, mask);
+	if (!address) {
+		SetConsoleTextAttribute(console, 0x0c);
+		cout << "Error. Address for hook wasn't found. This may be because you already executed this program or because somehow the bypass is outdate. Trying again anyway..." << endl;
+		Sleep(10000);
+		system("cls");
+		main();
+	}
+	
+	/* As the pattern that I scanned is -6 that the address that I want to modify, i am increasing 6  to this */
+	address = (DWORD*)((DWORD)address + 6); 
+	// cout << "The hook address was found. It is: 0x" << hex << address << endl;
+	
+	/* Now we need to know where the return address should be. Because we will hook the address with a jump */
+	/* The return address is address + 8. This is where the jmp and nops are finisheds */
+	DWORD* return_hook_address = (DWORD*)((DWORD)address + 8);
+
+	/* Now we alloc memory to the target process. We will need this to hook. VirtualAllocEx  will return the address were it was allocated	*/
+	DWORD* alloc_address = (DWORD*) VirtualAllocEx(hprocess, 0, 1024, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+	if (!alloc_address) {
+		SetConsoleTextAttribute(console, 0x0c);
+		cout << "Error while allocating memory..." << endl;
+		Sleep(3000);
+		main();
+	}
+
+
 int choice;
 Encryption encryption = Encryption();
 WEB webb = WEB();
