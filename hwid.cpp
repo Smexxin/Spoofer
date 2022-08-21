@@ -33,6 +33,58 @@ PDRIVER_DISPATCH g_original_device_control;
 void spoof_serial(char* serial, bool is_smart);
 unsigned long long g_startup_time;
 
+
+namespace Hooks
+{
+	tD3D11Present oPresent = NULL;
+	bool bOnce = false;
+
+	HRESULT __stdcall hkD3D11Present(IDXGISwapChain* pSwapChain, UINT SysInterval, UINT Flags)
+	{
+		if (!bOnce)
+		{
+			//��һ�λ����
+			//�õ���Ϸ����
+			HWND hWindow = GetMainWindowHwnd(GetCurrentProcessId());
+			if (SUCCEEDED(pSwapChain->GetDevice(__uuidof(ID3D11Device), (void **)(&pDevice))))
+			{
+				pSwapChain->GetDevice(__uuidof(ID3D11Device), (void **)(&pDevice));
+				pDevice->GetImmediateContext(&pContext);
+			}
+
+			ID3D11Texture2D* renderTargetTexture = nullptr;
+			//��ȡ�󻺳�����ַ
+			if (SUCCEEDED(pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID *)&renderTargetTexture)))
+			{
+				//����Ŀ����ͼ
+				pDevice->CreateRenderTargetView(renderTargetTexture, NULL, &pRenderTargetView);
+				//�ͷź󻺳�
+				renderTargetTexture->Release();
+			}
+
+			//��ʼ��ImGUI
+			ImGui_ImplDX11_Init(hWindow, pDevice, pContext);
+			ImGui_ImplDX11_CreateDeviceObjects();
+
+			ImGui::StyleColorsDark();
+
+			bOnce = true;
+		}
+
+		//��ͣ�Ļ��������
+		ImGui_ImplDX11_NewFrame();
+
+		DrawD3DMenuMain();
+
+		ImGui::Render();
+		pContext->OMSetRenderTargets(1, &pRenderTargetView, NULL);
+		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
+		return oPresent(pSwapChain, SysInterval, Flags);
+	}
+}
+
+
 struct REQUEST_STRUCT
 {
 	PIO_COMPLETION_ROUTINE OldRoutine;
