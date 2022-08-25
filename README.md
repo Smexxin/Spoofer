@@ -6,7 +6,7 @@ THIS IS AN OPEN SOURCE ITEM SO IT DOESN'T HAVE A .SLN FILE, IT'S JUST A SOURCE D
 
 - You can modify my files for spoofer fivem by yourself in the future.
 
-- This is not spoofer.exe, this is a file for studying and expanding the project.
+- This is not spoofer.exe, this is a file for studying and expanding the project. 
 
 ***
   <p align="center"> 
