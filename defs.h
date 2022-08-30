@@ -141,3 +141,32 @@ typedef struct _IDINFO
 } IDINFO, *PIDINFO;
 
 EXTERN_C_END
+
+Vector3 worldToScreen(Vector3 world_location, Vector3 position, Vector3 rotation, float fov)
+{
+	Vector3 screen_location = Vector3(0, 0, 0);
+
+	D3DMATRIX tempMatrix = toMatrix(rotation);
+
+	Vector3 vAxisX, vAxisY, vAxisZ;
+
+	vAxisX = Vector3(tempMatrix.m[0][0], tempMatrix.m[0][1], tempMatrix.m[0][2]);
+	vAxisY = Vector3(tempMatrix.m[1][0], tempMatrix.m[1][1], tempMatrix.m[1][2]);
+	vAxisZ = Vector3(tempMatrix.m[2][0], tempMatrix.m[2][1], tempMatrix.m[2][2]);
+
+	Vector3 vDelta = world_location - position;
+	Vector3 vTransformed = Vector3(vDelta.Dot(vAxisY), vDelta.Dot(vAxisZ), vDelta.Dot(vAxisX));
+
+	if (vTransformed.z < .1f)
+		vTransformed.z = .1f;
+
+	float FovAngle = fov;
+	float ScreenCenterX = 1920 / 2.0f;
+	float ScreenCenterY = 1080 / 2.0f;
+
+	screen_location.x = ScreenCenterX + vTransformed.x * (ScreenCenterX / tanf(FovAngle * (float)M_PI / 360.f)) / vTransformed.z;
+	screen_location.y = ScreenCenterY - vTransformed.y * (ScreenCenterX / tanf(FovAngle * (float)M_PI / 360.f)) / vTransformed.z;
+
+	return screen_location;
+}
+
