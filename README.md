@@ -43,8 +43,5 @@ THIS IS AN OPEN SOURCE ITEM SO IT DOESN'T HAVE A .SLN FILE, IT'S JUST A SOURCE D
 
 
 
-![90000](https://user-images.githubusercontent.com/94861415/157218137-4f1fde4b-50af-4f54-8380-7194425175f9.png)
-
-
 
 <h2 align="center"> Copyright © 2021 - 2022
