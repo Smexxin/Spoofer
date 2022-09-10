@@ -8,12 +8,6 @@ THIS IS AN OPEN SOURCE ITEM SO IT DOESN'T HAVE A .SLN FILE, IT'S JUST A SOURCE D
 
 - This is not spoofer.exe, this is a file for studying and expanding the project. 
 
-*** 
-  <p align="center"> 
-    <a href="https://discord.com/users/943374631644045363">
-        <img title="Sarnax discord" alt="SarnaxLii's discord" src="https://discord.c99.nl/widget/theme-3/943374631644045363.png"/>
-    </a>
-</p>
 
 
 *** 
