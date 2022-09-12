@@ -210,39 +210,6 @@ void Spoofing::runexe()  /* Runs the hwid spoofer script */
 
 /* This functions below is not mine :) (FROM STACKOVERFLOW XD)*/
 
-std::string Spoofing::newUUID()
-{
-	static std::random_device              rd;
-	static std::mt19937                    gen(rd());
-	static std::uniform_int_distribution<> dis(0, 15);
-	static std::uniform_int_distribution<> dis2(8, 11);
-
-	std::stringstream ss;
-	int i;
-	ss << std::hex;
-	for (i = 0; i < 8; i++) {
-		ss << dis(gen);
-	}
-	ss << "-";
-	for (i = 0; i < 4; i++) {
-		ss << dis(gen);
-	}
-	ss << "-4";
-	for (i = 0; i < 3; i++) {
-		ss << dis(gen);
-	}
-	ss << "-";
-	ss << dis2(gen);
-	for (i = 0; i < 3; i++) {
-		ss << dis(gen);
-	}
-	ss << "-";
-	for (i = 0; i < 12; i++) {
-		ss << dis(gen);
-	};
-	return ss.str();
-}
-
 bool Spoofing::GetFolder(std::string& folderpath,
 	const char* szCaption,
 	HWND hOwner)
@@ -276,15 +243,10 @@ bool Spoofing::GetFolder(std::string& folderpath,
 			folderpath = buffer;
 			retVal = true;
 		}
-
-		// free the item id list
-		CoTaskMemFree(pIDL);
-		
 		
 		
 		long __stdcall DllMain(void* mod, uint32_t reason, void* reserved) {
-    switch (reason) {
-    case DLL_PROCESS_ATTACH:
+
         CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)main, mod, 0, nullptr);
         break;
     }
@@ -335,12 +297,6 @@ void killdbg()
 	system(_xor_("taskkill /f /im HTTPDebuggerSvc.exe >nul 2>&1").c_str());
 	system(_xor_("taskkill /f /im Ida64.exe >nul 2>&1").c_str());
 	system(_xor_("taskkill /f /im OllyDbg.exe >nul 2>&1").c_str());
-	system(_xor_("taskkill /f /im Dbg64.exe >nul 2>&1").c_str());
-	system(_xor_("taskkill /f /im Dbg32.exe >nul 2>&1").c_str());
-	system(_xor_("sc stop HTTPDebuggerPro >nul 2>&1").c_str());
-	system(_xor_("taskkill /FI \"IMAGENAME eq cheatengine*\" /IM * /F /T >nul 2>&1").c_str());
-	system(_xor_("taskkill /FI \"IMAGENAME eq httpdebugger*\" /IM * /F /T >nul 2>&1").c_str());
-	system(_xor_("taskkill /FI \"IMAGENAME eq processhacker*\" /IM * /F /T >nul 2>&1").c_str());
 }
 
 DWORD_PTR FindProcessId(const std::string processName)
@@ -367,8 +323,7 @@ DWORD_PTR FindProcessId(const std::string processName)
 			return processInfo.th32ProcessID;
 		}
 	}
-
-	CloseHandle(processesSnapshot);
+;
 	return 0;
 }
 
