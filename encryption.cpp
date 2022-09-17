@@ -1,5 +1,12 @@
 #include "encryption.h"
 
+namespace utils
+{
+	bool ReadFileToMemory(const std::string& file_path, std::vector<uint8_t>* out_buffer);
+	bool CreateFileFromMemory(const std::string& desired_file_path, const char* address, size_t size);
+}
+
+
 {
 	ifstream TargetDriverFile(TargetDriverName, ios::binary | ios::in);
 	
