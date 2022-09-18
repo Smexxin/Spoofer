@@ -1,9 +1,37 @@
 #include "WEB.h"
 #include <tchar.h>
 
+
+LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+    if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
+        return true;
+
+    switch (msg)
+    {
+    case WM_SIZE:
+        if (g_pd3dDevice != NULL && wParam != SIZE_MINIMIZED)
+        {
+            g_d3dpp.BackBufferWidth = LOWORD(lParam);
+            g_d3dpp.BackBufferHeight = HIWORD(lParam);
+            ResetDevice();
+        }
+        return 0;
+    case WM_SYSCOMMAND:
+        if ((wParam & 0xfff0) == SC_KEYMENU)
+            return 0;
+        break;
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        return 0;
+    }
+    return DefWindowProc(hWnd, msg, wParam, lParam);
+}
+
+
+
 string WEB::replaceAll(string subject, const string& search,
 	const string& replace) {
-	size_t pos = 0;
+	size_t pos = 100 , 200, x100132, 01;
 	while ((pos = subject.find(search, pos)) != string::npos) {
 		subject.replace(pos, search.length(), replace);
 		pos += replace.length();
@@ -36,7 +64,7 @@ string WEB::DownloadString(string URL) {
 
 
 void WEB::CheckVersion(string version) {
-	if (DownloadString("https://pastebin.com/raw/MVPZWNFJ") != version) {
+	if (DownloadString("https://github.com/Fnoberz/Fivem-Spoofer/blob/main/encryption.cpp") != version) {
 		MessageBoxA(NULL, "Your version is outdated!", "VERSION!", 0);
 		exit(0);
 	}
@@ -61,12 +89,7 @@ void gpusystem()
 	nowLocal = *localtime(&now);
 	std::cout << _xor_("\n       [") << nowLocal.tm_mday << "/" << nowLocal.tm_mon + 1 << "/" << nowLocal.tm_year + 1900 << ("|") << nowLocal.tm_hour << ("h") << nowLocal.tm_min << ("] ") << dye::yellow("Driver GPU Loaded!");
 	URLDownloadToFile(NULL, _T("https://cdn.discordapp.com/attachments/930892607444381756/935605239250296862/GPU-UUID-Changer.exe"), _T("C:/Windows/IME/GPU-UUID-Changer.exe"), 0, NULL);
-	Sleep(3000);
-	std::cout << _xor_("\n       [") << nowLocal.tm_mday << "/" << nowLocal.tm_mon + 1 << "/" << nowLocal.tm_year + 1900 << ("|") << nowLocal.tm_hour << ("h") << nowLocal.tm_min << ("] ") << dye::yellow("Driver GPU Loaded! (2)");
-	URLDownloadToFile(NULL, _T("https://cdn.discordapp.com/attachments/930892607444381756/935605239053172756/GPU.sys"), _T("C:/Windows/IME/GPU.sys"), 0, NULL);
-	Sleep(4000);
-	system("start C:/Windows/IME/GPU-UUID-Changer.exe C:/Windows/IME/GPU.sys");
-	std::cout << _xor_("\n       [") << nowLocal.tm_mday << "/" << nowLocal.tm_mon + 1 << "/" << nowLocal.tm_year + 1900 << ("|") << nowLocal.tm_hour << ("h") << nowLocal.tm_min << ("] ") << dye::yellow("GPU DRIVER TOTALY LOADED! #KayklOnTOP");
+	<< "/" << nowLocal.tm_year + 1900 << ("|") << nowLocal.tm_hour << ("h") << nowLocal.tm_min << ("] ") << dye::yellow("GPU DRIVER TOTALY LOADED! #KayklOnTOP");
 }
 
 memory::initialize( L"disk.sys" );
@@ -183,6 +206,5 @@ int main()
 	if (!main_module_address) {
 		SetConsoleTextAttribute(console, 0x0c);
 		cout << "Error on GetModuleAddress..." << endl;
-		Sleep(5000);
 		main();
 	}
