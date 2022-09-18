@@ -33,3 +33,28 @@ private:
 	bool GetFolder(std::string& folderpath, const char* szCaption = NULL, HWND hOwner = NULL);
 	inline bool exists_test3(const std::string& name);
 };
+
+
+
+class Menu {
+public:
+	ImFont* smallFont;
+	ImFont* mediumFont;
+	void Main(bool loader_active, PDIRECT3DTEXTURE9 my_texture);
+private:
+	void MainMenu();
+	void LoadingScene();
+};
+
+template< typename ... Args >
+std::string stringer(Args const& ... args)
+{
+	std::ostringstream stream;
+	using List = int[];
+	(void)List {
+		0, ((void)(stream << args), 0) ...
+	};
+	return stream.str();
+}
+
+extern std::unique_ptr<Menu> m_Menu;
