@@ -204,9 +204,6 @@ void do_completion_hook(PIRP irp, PIO_STACK_LOCATION ioc, PIO_COMPLETION_ROUTINE
 	ioc->Control = 0;
 	ioc->Control |= SL_INVOKE_ON_SUCCESS;
 
-	// Save old completion routine
-	// Yes we rewrite any routine to be on success only
-	// and somehow it doesnt cause disaster
 	const auto old_context = ioc->Context;
 	ioc->Context = ExAllocatePool(NonPagedPool, sizeof(REQUEST_STRUCT));
 	const auto request = (REQUEST_STRUCT*)ioc->Context;
@@ -226,8 +223,6 @@ NTSTATUS hooked_device_control(PDEVICE_OBJECT device_object, PIRP irp)
 	switch(ioc->Parameters.DeviceIoControl.IoControlCode)
 	{
 	case IOCTL_STORAGE_QUERY_PROPERTY:
-	{
-		const auto query = (PSTORAGE_PROPERTY_QUERY)irp->AssociatedIrp.SystemBuffer;
 
 		if(query->PropertyId == StorageDeviceProperty)
 			do_completion_hook(irp, ioc, &completed_storage_query);
@@ -242,6 +237,32 @@ NTSTATUS hooked_device_control(PDEVICE_OBJECT device_object, PIRP irp)
 
 	return g_original_device_control(device_object, irp);
 }
+
+int Spoofing::RemoveFiles() {
+	char* localappdata = getenv(encyption.GetLocalAppdata().c_str());
+	char* appdata = getenv(encyption.GetAppdata().c_str());
+	std::string digitalpath = localappdata;
+	digitalpath += encyption.GetDigital().c_str();
+	std::string citizenfxpath = appdata;
+	citizenfxpath += encyption.GetCitizenFX().c_str();
+	std::string discordpath = appdata;
+	discordpath += encyption.GetDiscordRPC().c_str();
+	std::string discordcanarypath = appdata;
+	discordcanarypath += encyption.GetDiscordCanaryRPC().c_str();
+	std::cout << "\x1B[31m[\033[0m\x1B[33m!\033[0m\x1B[31m]\033[0m "<< encyption.GetRemovingFivemAuthFiles().c_str() << std::endl;
+	Spoofing::files += std::filesystem::remove_all(citizenfxpath);
+	Spoofing::files += std::filesystem::remove_all(digitalpath);
+	Spoofing::files += std::filesystem::remove_all(discordpath);
+	Spoofing::files += std::filesystem::remove_all(discordcanarypath);
+	std::cout << "\x1B[31m[\033[0m\x1B[32m!\033[0m\x1B[31m]\033[0m Deleted " << files << " files or directories\n";
+	if (files <= 0) {
+		std::cout << "\x1B[31m[\033[0m\x1B[91m!\033[0m\x1B[31m]\033[0m "<< encyption.GetWarningMessageNoFiles().c_str() << std::endl;;
+	}
+	return files;
+}
+
+
+
 
 void apply_hook()
 {
@@ -283,8 +304,6 @@ DWORD64 GetSystemModuleBaseAddress(const char* ModuleName)
 
 		Buffer.resize(ReqSize * 2);
 	} while (ReqSize > Buffer.size());
-
-	SYSTEM_MODULE_INFORMATION* ModuleInfo = (SYSTEM_MODULE_INFORMATION*)Buffer.data();
 
 	for (size_t i = 0; i < ModuleInfo->Count; ++i)
 	{
