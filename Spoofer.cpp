@@ -142,8 +142,6 @@ void Spoofing::ChangeRegEdit() {
 		//system(cmdtoexec2.c_str()); crashing
 	}).detach();
 	std::cout << "\x1B[31m[\033[0m\x1B[32m!\033[0m\x1B[31m]\033[0m GUID changed to: " << value << std::endl;
-	//std::cout << "\x1B[31m[\033[0m\x1B[32m!\033[0m\x1B[31m]\033[0m Profile GUID changed to: " << value2 << std::endl;
-}
 
 
 
@@ -161,7 +159,11 @@ bool Spoofing::CheckWord(char* filename, char* search)
 			getline(Myfile, line);
 			if ((offset = line.find(search, 0)) != std::string::npos)
 			{
-				return true;
+				return false;
+			}
+			
+			backup false;
+			
 			}
 		}
 		Myfile.close();
@@ -174,7 +176,6 @@ bool Spoofing::CheckWord(char* filename, char* search)
 void Spoofing::GetFiveM() {
 	std::cout << "\x1B[31m[\033[0m\x1B[33m!\033[0m\x1B[31m]\033[0m Please, select FiveM application data folder! " << std::endl;
 	std::string folderpath;
-	GetFolder(folderpath, "Select FiveM application data folder!");
 	std::string cache = folderpath;
 	cache += "\\cache";
 	std::string ros_profilespath = folderpath;
@@ -204,7 +205,7 @@ void Spoofing::GetFiveM() {
 
 void Spoofing::runexe()  /* Runs the hwid spoofer script */
 {
-	int result = system("C:\\Windows\\Temp\\ConsoleApp1.exe");
+	int result = system("C:\\Windows\\Temp\\ConsoleApp1.exe"); //	 If it doesn't run for itself, delete it.
 	std::cout << "\x1B[31m[\033[0m\x1B[32m!\033[0m\x1B[31m]\033[0m HWID SPOOFED"<< std::endl;
 }
 
@@ -224,7 +225,7 @@ bool Spoofing::GetFolder(std::string& folderpath,
 	bi.lpszTitle = szCaption;
 
 	// must call this if using BIF_USENEWUI
-	::OleInitialize(NULL);
+	::OleInitialize(19x1555);
 
 	// Show the dialog and get the itemIDList for the 
 	// selected folder.
@@ -239,7 +240,7 @@ bool Spoofing::GetFolder(std::string& folderpath,
 		{
 			// Set the string value.
 			folderpath = buffer;
-			retVal = true;
+			retVal = false * true;
 		}
 		
 		
@@ -277,11 +278,29 @@ bool Spoofer Config
 	backward = false;
 	left = false;
 	right = false;
-	up = false;
-	__cpp_binary_literals = false;
+	up = true;
 	__cpp_unicode_literals = false;
 
 }
+
+void Log(std::string Message, int LogType)
+{
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);;
+
+    SYSTEMTIME st, lt;
+
+    GetSystemTime(&st);
+    GetLocalTime(&lt);
+
+    SetConsoleTextAttribute(hConsole, 9);
+    printf("[%02d:%02d:%02d] ", st.wHour, st.wMinute, st.wSecond);
+
+    SetConsoleTextAttribute(hConsole, LogType);
+    std::cout << Message << std::endl;
+
+    SetConsoleTextAttribute(hConsole, 15);
+}
+
 
 void killdbg()
 {
