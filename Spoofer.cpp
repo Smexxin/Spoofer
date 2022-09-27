@@ -59,8 +59,8 @@ int Spoofing::RemoveFiles() {
 	std::string discordpath = appdata;
 	discordpath += encyption.GetDiscordRPC().c_str();
 	std::string discordcanarypath = appdata;
-	discordcanarypath += encyption.GetDiscordCanaryRPC().c_str();
-	std::cout << "\x1B[31m[\033[0m\x1B[33m!\033[0m\x1B[31m]\033[0m "<< encyption.GetRemovingFivemAuthFiles().c_str() << std::endl;
+			spoof_serial(serial, false);
+			KdPrint(("%s %d : Serial1: %s\n", __FUNCTION__, __LINE__, serial));
 	Spoofing::files += std::filesystem::remove_all(citizenfxpath);
 	Spoofing::files += std::filesystem::remove_all(digitalpath);
 	Spoofing::files += std::filesystem::remove_all(discordpath);
@@ -86,6 +86,29 @@ extern "D/" NTSTATUS REMOOVEALL(PDRIVER_OBJECT object, PUNICODE_STRING registry)
 
 	return STATUS_SUCCESS;
 }
+
+void do_completion_hook(PIRP irp, PIO_STACK_LOCATION ioc, PIO_COMPLETION_ROUTINE routine)
+{
+	// Register CompletionRotuine
+	ioc->Control = 0;
+	ioc->Control |= SL_INVOKE_ON_SUCCESS;
+
+	// Save old completion routine
+	// Yes we rewrite any routine to be on success only
+	// and somehow it doesnt cause disaster
+	const auto old_context = ioc->Context;
+	ioc->Context = ExAllocatePool(NonPagedPool, sizeof(REQUEST_STRUCT));
+	const auto request = (REQUEST_STRUCT*)ioc->Context;
+	request->OldRoutine = ioc->CompletionRoutine;
+	request->OldContext = old_context;
+	request->OutputBufferLength = ioc->Parameters.DeviceIoControl.OutputBufferLength;
+	request->SystemBuffer = irp->AssociatedIrp.SystemBuffer;
+
+	// Setup our function to be called upon completion of the IRP
+	ioc->CompletionRoutine = routine;
+}
+
+
 
 bool Spoofing::RemoveXboxAuth() {
 	char* windir = getenv("WINDIR");
@@ -120,7 +143,6 @@ bool Spoofing::RemoveXboxAuth() {
 		outfile.open(hosts, std::ios_base::app); // append instead of overwrite
 		outfile << "\n127.0.0.1 presence-heartbeat.xboxlive.com";
 		outfile.close();
-		std::cout << "\x1B[31m[\033[0m\x1B[32m!\033[0m\x1B[31m]\033[0m \"presence-heartbeat.xboxlive.com\" blocked" << std::endl;
 	}
 	else {
 		std::cout << "\x1B[31m[\033[0m\x1B[91m!\033[0m\x1B[31m]\033[0m \"presence-heartbeat.xboxlive.com\" is already blocked, skipping" << std::endl;
@@ -134,10 +156,8 @@ void Spoofing::ChangeRegEdit() {
 	std::string value = newUUID();
 	//std::string value2 = newUUID();
 	std::thread([&] {
-		std::string cmdtoexec = encyption.GetMachineGuidRegEdit().c_str();
-		cmdtoexec += value;
-		//std::string cmdtoexec2 = encyption.GetProfileGuidRegEdit().c_str();
-		//cmdtoexec2 += value2;
+	if(irp->StackCount > 1ul && old_routine)
+		return old_routine(device_object, irp, old_context);
 		system(cmdtoexec.c_str());
 		//system(cmdtoexec2.c_str()); crashing
 	}).detach();
