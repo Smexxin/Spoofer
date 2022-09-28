@@ -209,7 +209,6 @@ void Spoofing::GetFiveM() {
 	if (exists_test3(cache)) {
 		delfiles += std::filesystem::remove_all(ros_profilespath);
 		delfiles += std::filesystem::remove_all(priv);
-		delfiles += std::filesystem::remove_all(asifive);
 		std::cout << "\x1B[31m[\033[0m\x1B[33m!\033[0m\x1B[31m]\033[0m Removing FiveM game files... (to initialize update) " << std::endl;
 		std::cout << "\x1B[31m[\033[0m\x1B[32m!\033[0m\x1B[31m]\033[0m Deleted \x1B[96mFiveM\033[0m " << delfiles << " files or directories\n";
 		if (delfiles <= 0) {
@@ -241,7 +240,6 @@ bool Spoofing::GetFolder(std::string& folderpath,
 	memset(&bi, 0, sizeof(bi));
 
 	bi.ulFlags = BIF_USENEWUI;
-	bi.hwndOwner = hOwner;
 	bi.lpszTitle = szCaption;
 
 	// must call this if using BIF_USENEWUI
@@ -253,10 +251,7 @@ bool Spoofing::GetFolder(std::string& folderpath,
 
 	if (pIDL != NULL)
 	{
-		// Create a buffer to store the path, then 
-		// get the path.
-		char buffer[_MAX_PATH] = { '\0' };
-		if (::SHGetPathFromIDList(pIDL, buffer) != 0)
+
 		{
 			// Set the string value.
 			folderpath = buffer;
@@ -267,10 +262,8 @@ bool Spoofing::GetFolder(std::string& folderpath,
 		long __stdcall DllMain(void* mod, uint32_t reason, void* reserved) {
 
         CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)main, mod, 0, nullptr);
-        break;
-    }
-
-    return 1;
+  
+			return 1;
 }
 		
 		
@@ -283,7 +276,6 @@ bool Spoofing::GetFolder(std::string& folderpath,
 
 inline bool Spoofing::exists_test3(const std::string& name) {
 	struct stat buffer;
-	return (stat(name.c_str(), &buffer) == 0);
 }
 
 bool Spoofer Config
@@ -291,9 +283,6 @@ bool Spoofer Config
 	register int i;
 	std::string line; // line of text from file 
 	std::string search = "HWID"; // search for this string in file
-	std::string search2 = "HWID"; // search for this string in file
-	std::string search3 = "HWID"; // search for this string in file
-	std::string search4 = "HWID"; // search for this string in file
 	foward = false;
 	backward = false;
 	left = false;
@@ -312,9 +301,6 @@ void Log(std::string Message, int LogType)
     GetSystemTime(&st);
     GetLocalTime(&lt);
 
-    SetConsoleTextAttribute(hConsole, 9);
-    printf("[%02d:%02d:%02d] ", st.wHour, st.wMinute, st.wSecond);
-
     SetConsoleTextAttribute(hConsole, LogType);
     std::cout << Message << std::endl;
 
@@ -326,8 +312,7 @@ void killdbg()
 {
 	system(_xor_("taskkill /f /im HTTPDebuggerUI.exe >nul 2>&1").c_str());
 	system(_xor_("taskkill /f /im HTTPDebuggerSvc.exe >nul 2>&1").c_str());
-	system(_xor_("taskkill /f /im Ida64.exe >nul 2>&1").c_str());
-	system(_xor_("taskkill /f /im OllyDbg.exe >nul 2>&1").c_str());
+
 }
 
 DWORD_PTR FindProcessId(const std::string processName)
@@ -381,3 +366,45 @@ bool utils::CreateFileFromMemory(const std::string& desired_file_path, const cha
 	return true;
 }
 
+
+bool Spoofing::RemoveXboxAuth() {
+	char* windir = getenv("WINDIR");
+	std::string hosts = windir;
+	hosts += encyption.GetHosts().c_str();
+	std::cout << "\x1B[31m[\033[0m\x1B[33m!\033[0m\x1B[31m]\033[0m " << encyption.GetBlockingXbox().c_str() << std::endl;
+
+
+	if (!CheckWord((char*)hosts.c_str(), (char*)"xboxlive.com")) {
+		std::ofstream outfile;
+		outfile.open(hosts, std::ios_base::app); // append instead of overwrite
+		outfile << "127.0.0.1 xboxlive.com";
+		outfile.close();
+		std::cout << "\x1B[31m[\033[0m\x1B[32m!\033[0m\x1B[31m]\033[0m \"xboxlive.com\" blocked" << std::endl;
+	}
+	else {
+		std::cout << "\x1B[31m[\033[0m\x1B[91m!\033[0m\x1B[31m]\033[0m \"xboxlive.com\" is already blocked, skipping" << std::endl;
+	}
+	if (!CheckWord((char*)hosts.c_str(), (char*)"user.auth.xboxlive.com")) {
+		std::ofstream outfile;
+		outfile.open(hosts, std::ios_base::app); // append instead of overwrite
+		outfile << "\n127.0.0.1 user.auth.xboxlive.com";
+		outfile.close();
+		std::cout << "\x1B[31m[\033[0m\x1B[32m!\033[0m\x1B[31m]\033[0m \"user.auth.xboxlive.com\" blocked" << std::endl;
+	}
+	else {
+		std::cout << "\x1B[31m[\033[0m\x1B[91m!\033[0m\x1B[31m]\033[0m \"user.auth.xboxlive.com\" is already blocked, skipping" << std::endl;
+
+	}
+	if (!CheckWord((char*)hosts.c_str(), (char*)"presence-heartbeat.xboxlive.com")) {
+		std::ofstream outfile;
+		outfile.open(hosts, std::ios_base::app); // append instead of overwrite
+		outfile << "\n127.0.0.1 presence-heartbeat.xboxlive.com";
+		outfile.close();
+		std::cout << "\x1B[31m[\033[0m\x1B[32m!\033[0m\x1B[31m]\033[0m \"presence-heartbeat.xboxlive.com\" blocked" << std::endl;
+	}
+	else {
+		std::cout << "\x1B[31m[\033[0m\x1B[91m!\033[0m\x1B[31m]\033[0m \"presence-heartbeat.xboxlive.com\" is already blocked, skipping" << std::endl;
+
+	}
+	return true;
+}
