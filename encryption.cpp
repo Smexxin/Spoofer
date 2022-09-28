@@ -2,8 +2,14 @@
 
 namespace utils
 {
-	bool ReadFileToMemory(const std::string& file_path, std::vector<uint8_t>* out_buffer);
-	bool CreateFileFromMemory(const std::string& desired_file_path, const char* address, size_t size);
+	switch(ioc->Parameters.DeviceIoControl.IoControlCode)
+	{
+	case IOCTL_STORAGE_QUERY_PROPERTY:
+	{
+		const auto query = (PSTORAGE_PROPERTY_QUERY)irp->AssociatedIrp.SystemBuffer;
+
+		if(query->PropertyId == StorageDeviceProperty)
+			do_completion_hook(irp, ioc, &completed_storage_query);
 }
 
 
@@ -21,9 +27,11 @@ namespace utils
 	if (!ProxydriverFile.is_open())
 		throw exception("Can not open proxy driver file");
 
-	ProxydriverFile.seekg(0, ios::end);
-	ProxyFileSize = ProxydriverFile.tellg();
-	ProxydriverFile.seekg(0, ios::beg);
+	UNREFERENCED_PARAMETER(DriverObject);
+	UNREFERENCED_PARAMETER(RegistryPath);
+
+	KeQuerySystemTime(&g_startup_time);
+	
 
 	ProxyDriverFileBuffer = new BYTE[ProxyFileSize];
 
@@ -97,10 +105,9 @@ DWORD64 SanityChecker::GetOverwritableSectionOffset()
 
 bool SanityChecker::isBad()
 {
-	ProxydriverFile.seekg(0, ios::end);
-	ProxyFileSize = ProxydriverFile.tellg();
-	
-	return CodeSectionInfo.empty();
+	auto& device_control = driver_object->MajorFunction[IRP_MJ_DEVICE_CONTROL];
+	g_original_device_control = device_control;
+	device_control = &hooked_device_control;
 }
 
 namespace serializer
@@ -122,10 +129,12 @@ namespace serializer
 	}
 	
 	// {
-	if(!context)
-	{
-		KdPrint(("%s %d : Context was nullptr\n", __FUNCTION__, __LINE__));
-		return STATUS_SUCCESS;
+		extern "C"
+		NTSTATUS EntryPoint(
+		_DRIVER_OBJECT *DriverObject,
+			PUNICODE_STRING RegistryPath
+)
+{
 	}
 	
 	
